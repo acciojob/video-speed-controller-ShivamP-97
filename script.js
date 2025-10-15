@@ -1,7 +1,7 @@
 
 const video = document.querySelector('.player__video');
 const toggle = document.querySelector('.toggle');
-const skipButtons = document.querySelectorAll('.skip .rewind');
+const skipButtons = document.querySelectorAll('.skip');
 const sliders = document.querySelectorAll('.player__slider');
 const progress = document.querySelector('.progress');
 const progressFilled = document.querySelector('.progress__filled');
