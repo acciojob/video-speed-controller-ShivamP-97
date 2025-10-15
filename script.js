@@ -1,18 +1,49 @@
-const speed = document.querySelector('.speed');
-const speedBar = speed.querySelector('.speed-bar');
-const video = document.querySelector('video');
 
-const min = 0.4;
-const max = 4;
+const video = document.querySelector('.viewer');
+const toggle = document.querySelector('.toggle');
+const skipButtons = document.querySelectorAll('.skip');
+const sliders = document.querySelectorAll('.player__slider');
+const progress = document.querySelector('.progress');
+const progressFilled = document.querySelector('.progress__filled');
 
-function handleMove(e) {
-  const y = e.pageY - speed.getBoundingClientRect().top;
-  const percent = y / speed.offsetHeight;
-  const playbackRate = percent * (max - min) + min;
-
-  speedBar.style.height = `${percent * 100}%`;
-  speedBar.textContent = `${playbackRate.toFixed(2)}×`;
-  video.playbackRate = playbackRate;
+function togglePlay() {
+  video.paused ? video.play() : video.pause();
 }
 
-speed.addEventListener('mousemove', handleMove);
+function updateButton() {
+  toggle.textContent = video.paused ? '►' : '❚ ❚';
+}
+
+function skip() {
+  video.currentTime += parseFloat(this.dataset.skip);
+}
+
+function handleRangeUpdate() {
+  video[this.name] = this.value;
+}
+
+function handleProgress() {
+  const percent = (video.currentTime / video.duration) * 100;
+  progressFilled.style.width = `${percent}%`;
+}
+
+function scrub(e) {
+  const scrubTime = (e.offsetX / progress.offsetWidth) * video.duration;
+  video.currentTime = scrubTime;
+}
+
+video.addEventListener('click', togglePlay);
+video.addEventListener('play', updateButton);
+video.addEventListener('pause', updateButton);
+video.addEventListener('timeupdate', handleProgress);
+
+toggle.addEventListener('click', togglePlay);
+
+skipButtons.forEach(button => button.addEventListener('click', skip));
+
+sliders.forEach(slider => {
+  slider.addEventListener('input', handleRangeUpdate);
+  slider.addEventListener('change', handleRangeUpdate);
+});
+
+progress.addEventListener('click', scrub);

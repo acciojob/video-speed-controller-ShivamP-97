@@ -1,0 +1,64 @@
+    body {
+      margin: 0;
+      font-family: sans-serif;
+      background: #222;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .player {
+      max-width: 800px;
+      width: 100%;
+      background: #000;
+      color: #fff;
+      border: 5px solid #444;
+    }
+
+    .viewer {
+      width: 100%;
+    }
+
+    .player__controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 10px;
+    }
+
+    .progress {
+      flex: 1 0 100%;
+      height: 10px;
+      background: #555;
+      cursor: pointer;
+      margin-bottom: 10px;
+      position: relative;
+    }
+
+    .progress__filled {
+      width: 0%;
+      height: 100%;
+      background: #f90;
+      transition: width 0.1s;
+    }
+
+    .player__button,
+    .skip,
+    .player__slider {
+      margin-right: 10px;
+      font-size: 16px;
+      background: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+
+    .player__slider {
+      width: 100px;
+    }
+
+    label {
+      font-size: 14px;
+      margin-right: 10px;
+    }
